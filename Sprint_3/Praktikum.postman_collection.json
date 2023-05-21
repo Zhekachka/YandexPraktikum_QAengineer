@@ -1,0 +1,500 @@
+{
+	"info": {
+		"_postman_id": "8ee79664-e134-43cd-81f6-6eac30124aca",
+		"name": "Praktikum",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25461219"
+	},
+	"item": [
+		{
+			"name": "Получить список наборов в карточке",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server_url}}/api/v1/kits?cardId=1",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"kits"
+					],
+					"query": [
+						{
+							"key": "cardId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создать пустой набор",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cardId\": 1, \r\n    \"name\": \"Для вечеринки\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server_url}}api/v1/kits",
+					"host": [
+						"{{server_url}}api"
+					],
+					"path": [
+						"v1",
+						"kits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получить список наборов по продуктам",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ids\": [\r\n        1,\r\n        22\r\n    ]\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server_url}}/api/v1/products/kits",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"kits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получить список продуктов по имени набора",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server_url}}/api/v1/kits/search?name=В космос",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"kits",
+						"search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "В космос"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Запрос логов",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://5cb8ab66-af79-4b0c-9bed-bcbd44b01282.serverhub.praktikum-services.ru/api/logs/main",
+					"protocol": "https",
+					"host": [
+						"5cb8ab66-af79-4b0c-9bed-bcbd44b01282",
+						"serverhub",
+						"praktikum-services",
+						"ru"
+					],
+					"path": [
+						"api",
+						"logs",
+						"main"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Проверить наличие товаров на складах Яндекс.Прилавок",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"id\": 5,\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"quantity\": 5\r\n        }\r\n    ]\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://aaa12a7e-fb8f-4ff9-9b9f-389ea440c339.serverhub.praktikum-services.ru/api/v1/warehouses/check",
+					"protocol": "https",
+					"host": [
+						"aaa12a7e-fb8f-4ff9-9b9f-389ea440c339",
+						"serverhub",
+						"praktikum-services",
+						"ru"
+					],
+					"path": [
+						"api",
+						"v1",
+						"warehouses",
+						"check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Добавить продукты в набор Яндекс.Прилавок",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 3,\r\n            \"quantity\": 2\r\n        },\r\n        {\r\n            \"id\": 45,\r\n            \"quantity\": 2\r\n        }\r\n    ]\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://5cb8ab66-af79-4b0c-9bed-bcbd44b01282.serverhub.praktikum-services.ru/api/v1/kits/2/products",
+					"protocol": "https",
+					"host": [
+						"5cb8ab66-af79-4b0c-9bed-bcbd44b01282",
+						"serverhub",
+						"praktikum-services",
+						"ru"
+					],
+					"path": [
+						"api",
+						"v1",
+						"kits",
+						"2",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Поиск наборов по продуктам",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Поиск продуктов на складе Чердак",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<InputModel>\r\n  <deliveryTime>9</deliveryTime>\r\n  <product id=\"4\" quantity=\"2\" />\r\n  <product id=\"48\" quantity=\"2\" />\r\n</InputModel> ",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://5ae63651-8176-463c-b8c1-9f3498994173.serverhub.praktikum-services.ru/attic/calculate.xml",
+					"protocol": "https",
+					"host": [
+						"5ae63651-8176-463c-b8c1-9f3498994173",
+						"serverhub",
+						"praktikum-services",
+						"ru"
+					],
+					"path": [
+						"attic",
+						"calculate.xml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Поиск продуктов на складе большой мир",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"  xmlns:tns=\"WebServices.WarehouseWsdl\">\r\n    <soap:Body>\r\n        <tns:checkSupply>\r\n            <tns:deliveryTime>10</tns:deliveryTime>\r\n            <tns:products>\r\n                <tns:products>\r\n                    <id>2</id>\r\n                    <quantity>1</quantity>\r\n                </tns:products>\r\n                <tns:products>\r\n                    <id>49</id>\r\n                    <quantity>1</quantity>\r\n                </tns:products>\r\n            </tns:products>\r\n        </tns:checkSupply>\r\n    </soap:Body>\r\n</soap:Envelope> ",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://5ae63651-8176-463c-b8c1-9f3498994173.serverhub.praktikum-services.ru/big-world/wsdl",
+					"protocol": "https",
+					"host": [
+						"5ae63651-8176-463c-b8c1-9f3498994173",
+						"serverhub",
+						"praktikum-services",
+						"ru"
+					],
+					"path": [
+						"big-world",
+						"wsdl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Запрос логов sacondary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://f1a948b4-6444-4dd4-871a-d847513726f5.serverhub.praktikum-services.ru/api/logs/secondary",
+					"protocol": "https",
+					"host": [
+						"f1a948b4-6444-4dd4-871a-d847513726f5",
+						"serverhub",
+						"praktikum-services",
+						"ru"
+					],
+					"path": [
+						"api",
+						"logs",
+						"secondary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Удаление набора",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://f1a948b4-6444-4dd4-871a-d847513726f5.serverhub.praktikum-services.ru/api/v1/kits/100",
+					"protocol": "https",
+					"host": [
+						"f1a948b4-6444-4dd4-871a-d847513726f5",
+						"serverhub",
+						"praktikum-services",
+						"ru"
+					],
+					"path": [
+						"api",
+						"v1",
+						"kits",
+						"100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание пользователя",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Леонид\",\r\n    \"phone\": \"+89998887712\",\r\n    \"address\": \"г. Москва, ул. Ленина, д. 1, кв. 6\",\r\n    \"email\": \"leonid@yandex.ru\",\r\n    \"comment\": \"Звонить в домофон\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server_url}}api/v1/users",
+					"host": [
+						"{{server_url}}api"
+					],
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Добавление продуктов в корзину",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantity\": 4\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"quantity\": 2\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server_url}}api/v1/orders/:id",
+					"host": [
+						"{{server_url}}api"
+					],
+					"path": [
+						"v1",
+						"orders",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание корзины",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantity\": 2\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://b2f1b91c-8eaf-48f4-9254-e12a47237a05.serverhub.praktikum-services.ru/api/v1/orders",
+					"protocol": "https",
+					"host": [
+						"b2f1b91c-8eaf-48f4-9254-e12a47237a05",
+						"serverhub",
+						"praktikum-services",
+						"ru"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Доставка службой привезем быстро",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<InputModel>\r\n    <productsCount>4</productsCount>\r\n    <productsWeight>2.4</productsWeight>\r\n    <deliveryTime>\"время\"</deliveryTime>\r\n</InputModel>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://a0080b35-c076-47ec-bae2-48bca4659c93.serverhub.praktikum-services.ru/fast-delivery/v3.1.1/calculate-delivery.xml",
+					"protocol": "https",
+					"host": [
+						"a0080b35-c076-47ec-bae2-48bca4659c93",
+						"serverhub",
+						"praktikum-services",
+						"ru"
+					],
+					"path": [
+						"fast-delivery",
+						"v3.1.1",
+						"calculate-delivery.xml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Удаление корзины",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://7976fe36-dc0f-4b9b-827d-3ba0688f8310.serverhub.praktikum-services.ru/api/v1/orders/100",
+					"protocol": "https",
+					"host": [
+						"7976fe36-dc0f-4b9b-827d-3ba0688f8310",
+						"serverhub",
+						"praktikum-services",
+						"ru"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Список продуктов в корзине",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://7976fe36-dc0f-4b9b-827d-3ba0688f8310.serverhub.praktikum-services.ru/api/v1/orders/100",
+					"protocol": "https",
+					"host": [
+						"7976fe36-dc0f-4b9b-827d-3ba0688f8310",
+						"serverhub",
+						"praktikum-services",
+						"ru"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"100"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
