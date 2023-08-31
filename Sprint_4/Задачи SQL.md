@@ -1,27 +1,25 @@
-Кокарева Евгения, 52_1-я когорта, 4-й спринт
+* РљРѕРЅСЃРѕР»СЊ
 
-Консоль
-
-Задание 1
-Команда или последовательность команд, которой удалось получить нужные логи:
+Р—Р°РґР°РЅРёРµ 1
+РљРѕРјР°РЅРґР° РёР»Рё РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚СЊ РєРѕРјР°РЅРґ, РєРѕС‚РѕСЂРѕР№ СѓРґР°Р»РѕСЃСЊ РїРѕР»СѓС‡РёС‚СЊ РЅСѓР¶РЅС‹Рµ Р»РѕРіРё:
  
 cd logs/2019/12 
 grep -R "^233.201."
 
-Логи:
+Р›РѕРіРё:
 233.201.188.154 - - [18/12/2019:21:46:01 +0000] "DELETE /events HTTP/1.1" 403 3971
 233.201.182.9 - - [21/12/2019:21:56:20 +0000] "PATCH /users HTTP/1.1" 400 4118
 
 
-Задание 2
-Команды, которые создают директории bug1 и events:
+Р—Р°РґР°РЅРёРµ 2
+РљРѕРјР°РЅРґС‹, РєРѕС‚РѕСЂС‹Рµ СЃРѕР·РґР°СЋС‚ РґРёСЂРµРєС‚РѕСЂРёРё bug1 Рё events:
 
 mkdir bug1
 mkdir bug1/events
-Команда, которой выбираешь запросы за указанный период. Это те запросы, которыми ты отбираешь логи в файл main.txt:
+РљРѕРјР°РЅРґР°, РєРѕС‚РѕСЂРѕР№ РІС‹Р±РёСЂР°РµС€СЊ Р·Р°РїСЂРѕСЃС‹ Р·Р° СѓРєР°Р·Р°РЅРЅС‹Р№ РїРµСЂРёРѕРґ. Р­С‚Рѕ С‚Рµ Р·Р°РїСЂРѕСЃС‹, РєРѕС‚РѕСЂС‹РјРё С‚С‹ РѕС‚Р±РёСЂР°РµС€СЊ Р»РѕРіРё РІ С„Р°Р№Р» main.txt:
 
 grep -R "3./12/2019:21:3.:.." ~/logs/2019/12/ > bug1/main.txt
-Команды, которыми ты кладёшь логи в файлы 400.txt и 500.txt из main.txt:
+РљРѕРјР°РЅРґС‹, РєРѕС‚РѕСЂС‹РјРё С‚С‹ РєР»Р°РґС‘С€СЊ Р»РѕРіРё РІ С„Р°Р№Р»С‹ 400.txt Рё 500.txt РёР· main.txt:
 
 grep " 400 " bug1/main.txt > bug1/events/400.txt
 grep " 500 " bug1/main.txt > bug1/events/500.txt
@@ -116,18 +114,18 @@ grep " 500 " bug1/main.txt > bug1/events/500.txt
 /home/morty/logs/2019/12/apache_2019-12-30.txt:196.18.151.117 - - [30/12/2019:21:39:55 +0000] "PUT /events HTTP/1.1" 500 4439
 /home/morty/logs/2019/12/apache_2019-12-30.txt:77.101.138.151 - - [30/12/2019:21:39:57 +0000] "PUT /lists HTTP/1.1" 500 2194
 
-База данных
+Р‘Р°Р·Р° РґР°РЅРЅС‹С…
 
-Задание 1
-Число автомобилей:
+Р—Р°РґР°РЅРёРµ 1
+Р§РёСЃР»Рѕ Р°РІС‚РѕРјРѕР±РёР»РµР№:
 
 5529
-Запрос, которым тебе удалось решить задачу.
+Р—Р°РїСЂРѕСЃ, РєРѕС‚РѕСЂС‹Рј С‚РµР±Рµ СѓРґР°Р»РѕСЃСЊ СЂРµС€РёС‚СЊ Р·Р°РґР°С‡Сѓ.
 
 \c chicago_taxi
 SELECT COUNT(*) AS cnt FROM cabs;
-Задание 2
-Список компаний с числом автомобилей меньше 100.
+Р—Р°РґР°РЅРёРµ 2
+РЎРїРёСЃРѕРє РєРѕРјРїР°РЅРёР№ СЃ С‡РёСЃР»РѕРј Р°РІС‚РѕРјРѕР±РёР»РµР№ РјРµРЅСЊС€Рµ 100.
  cnt |                 company_name
 -----+----------------------------------------------
   97 | Nova Taxi Affiliation Llc
@@ -178,11 +176,11 @@ SELECT COUNT(*) AS cnt FROM cabs;
    1 | Chicago Star Taxicab
    1 | 3011 - 66308 JBL Cab Inc.
 (51 rows)
-Запрос, которым тебе удалось решить задачу.
+Р—Р°РїСЂРѕСЃ, РєРѕС‚РѕСЂС‹Рј С‚РµР±Рµ СѓРґР°Р»РѕСЃСЊ СЂРµС€РёС‚СЊ Р·Р°РґР°С‡Сѓ.
 \c chicago_taxi
 SELECT COUNT(cab_id) AS cnt, company_name FROM cabs GROUP BY company_name HAVING COUNT(cab_id) < 100 ORDER BY cnt DESC
-Задание 3
-Таблица с данными за указанный период. 
+Р—Р°РґР°РЅРёРµ 3
+РўР°Р±Р»РёС†Р° СЃ РґР°РЅРЅС‹РјРё Р·Р° СѓРєР°Р·Р°РЅРЅС‹Р№ РїРµСЂРёРѕРґ. 
         ts          | weather_conditions
 ---------------------+--------------------
  2017-11-05 00:00:00 | Good
@@ -211,11 +209,11 @@ SELECT COUNT(cab_id) AS cnt, company_name FROM cabs GROUP BY company_name HAVING
  2017-11-05 23:00:00 | Good
  2017-11-06 00:00:00 | Good
 (25 rows)
-Запрос, которым удалось решить задачу.
+Р—Р°РїСЂРѕСЃ, РєРѕС‚РѕСЂС‹Рј СѓРґР°Р»РѕСЃСЊ СЂРµС€РёС‚СЊ Р·Р°РґР°С‡Сѓ.
 \c chicago_taxi
-SELECT ts, CASE WHEN description LIKE '%rain%’ OR description LIKE '%storm%' THEN ‘Bad’ ELSE ‘Good’ END AS weather_conditions FROM weather_records WHERE ts BETWEEN '2017-11-05 00:00:00' AND '2017-11-06 00:00:00';
-Задание 4
-Таблица с данными за указанный период.
+SELECT ts, CASE WHEN description LIKE '%rain%вЂ™ OR description LIKE '%storm%' THEN вЂBadвЂ™ ELSE вЂGoodвЂ™ END AS weather_conditions FROM weather_records WHERE ts BETWEEN '2017-11-05 00:00:00' AND '2017-11-06 00:00:00';
+Р—Р°РґР°РЅРёРµ 4
+РўР°Р±Р»РёС†Р° СЃ РґР°РЅРЅС‹РјРё Р·Р° СѓРєР°Р·Р°РЅРЅС‹Р№ РїРµСЂРёРѕРґ.
  Choice Taxi Association                      |         5015
  Globe Taxi                                   |         4383
  Dispatch Taxi Affiliation                    |         3355
@@ -264,8 +262,7 @@ American United                              |         1404
  2241 - 44667 - Felman Corp, Manuel Alonso    |            3
  3556 - 36214 RC Andrews Cab                  |            2
 (64 rows)
-Запрос, которым удалось решить задачу.
+Р—Р°РїСЂРѕСЃ, РєРѕС‚РѕСЂС‹Рј СѓРґР°Р»РѕСЃСЊ СЂРµС€РёС‚СЊ Р·Р°РґР°С‡Сѓ.
 \c chicago_taxi
 SELECT cabs.company_name as company_name, count(trips.cab_id) as trips_amount FROM trips INNER JOIN cabs ON cabs.cab_id = trips.cab_id WHERE cast(trips.start_ts as timestamp) >='2017-11-15 00:00:00' AND cast(trips.start_ts as timestamp) < '2017-11-17 00:00:00' GROUP BY company_name ORDER BY trips_amount DESC;
-
  
