@@ -1,6 +1,11 @@
-* Консоль
+## Консоль
 
-Задание 1
+* Задание 1
+  
+От разработчиков поступила задача: нужно выяснить, какие запросы шли с IP-адреса. IP-адрес состоит из четырёх чисел, они разделены точками. Тебе нужны адреса, которые начинаются с «233.201.».
+Логи лежат на удалённом сервере по адресу logs/2019/12. День, когда случилась ошибка, неизвестен. 
+Твоя задача — узнать, какие запросы были отправлены. 
+  
 Команда или последовательность команд, которой удалось получить нужные логи:
  
 cd logs/2019/12 
@@ -11,7 +16,15 @@ grep -R "^233.201."
 233.201.182.9 - - [21/12/2019:21:56:20 +0000] "PATCH /users HTTP/1.1" 400 4118
 
 
-Задание 2
+* Задание 2
+
+В системе обнаружен баг. Он проявлялся 30.12.2019 и 31.12.2019 с 21:30:00 до 21:39:59. При этом появлялись ошибки с номерами 400 и 500. Твоя задача — сохранить в отдельный файл логи, которые были записаны в этот период.  
+Затем эти логи надо разложить по отдельным файлам: логи с одинаковой ошибкой положи в один файл. Как это сделать:
+В домашней директории на удалённом сервере создай директорию bug1.
+Все запросы, которые произошли в указанный период, положи в файл main.txt в директорию bug1.
+Внутри директории bug1 создай директорию events.
+Внутри директории events создай файлы для ошибок с номерами 400 и 500. Назови эти файлы 400.txt и 500.txt соответственно. В них выдели логи с соответствующей ошибкой из файла main.txt.
+
 Команды, которые создают директории bug1 и events:
 
 mkdir bug1
@@ -114,155 +127,196 @@ grep " 500 " bug1/main.txt > bug1/events/500.txt
 /home/morty/logs/2019/12/apache_2019-12-30.txt:196.18.151.117 - - [30/12/2019:21:39:55 +0000] "PUT /events HTTP/1.1" 500 4439
 /home/morty/logs/2019/12/apache_2019-12-30.txt:77.101.138.151 - - [30/12/2019:21:39:57 +0000] "PUT /lists HTTP/1.1" 500 2194
 
-База данных
+## База данных
 
-Задание 1
-Число автомобилей:
+* Задание 1
 
-5529
+У тебя есть база данных с поездками на такси. По плану на линию обслуживания должно было выйти 10550 автомобилей — эта цифра покрывает спрос пользователей. Команде поступило много жалоб: свободных автомобилей оказалось недостаточно. Сколько такси вышло на линии на самом деле? Информация о всех машинах на линии есть в таблице cabs.
+Зайди на удалённый сервер.
+Подключись к базе данных chicago_taxi, используй логин morty и пароль smith.
+Посчитай, сколько всего автомобилей в таблице cabs. Учти, что один автомобиль может принадлежать разным компаниями.
+
+Число автомобилей: 5529
+
 Запрос, которым тебе удалось решить задачу.
 
 \c chicago_taxi
+
 SELECT COUNT(*) AS cnt FROM cabs;
-Задание 2
+
+* Задание 2
+
+Посчитай количество автомобилей в каждой компании из таблицы cabs. Отсортируй значения по убыванию. Команда предполагает, что некоторые компании не вывели достаточно автомобилей на линию. 
+Выведи те компании, в которых меньше 100 автомобилей. Поле с числом автомобилей назови cnt, поле с названием компании — company_name.
+  
 Список компаний с числом автомобилей меньше 100.
- cnt |                 company_name
------+----------------------------------------------
-  97 | Nova Taxi Affiliation Llc
-  89 | Patriot Taxi Dba Peace Taxi Associat
-  85 | Blue Diamond
-  81 | Checker Taxi Affiliation
-  80 | Chicago Medallion Management
-  69 | Chicago Independents
-  67 | 24 Seven Taxi
-  60 | Checker Taxi
-  55 | American United
-  53 | Chicago Medallion Leasing INC
-  49 | Top Cab Affiliation
-  48 | KOAM Taxi Association
-  38 | Chicago Taxicab
-  34 | Norshore Cab
-  20 | Gold Coast Taxi
-  20 | Metro Group
-  18 | Service Taxi Association
-  14 | 5 Star Taxi
-   8 | American United Taxi Affiliation
-   8 | Metro Jet Taxi A
-   7 | Setare Inc
-   1 | 5997 - 65283 AW Services Inc.
-   1 | 2092 - 61288 Sbeih company
-   1 | 1469 - 64126 Omar Jada
-   1 | 2733 - 74600 Benny Jona
-   1 | 2192 - 73487 Zeymane Corp
-   1 | 5006 - 39261 Salifu Bawa
-   1 | 3556 - 36214 RC Andrews Cab
-   1 | 3721 - Santamaria Express, Alvaro Santamaria
-   1 | 2809 - 95474 C & D Cab Co Inc.
-   1 | 2241 - 44667 - Felman Corp, Manuel Alonso
-   1 | 3620 - 52292 David K. Cab Corp.
-   1 | 2823 - 73307 Lee Express Inc
-   1 | 6057 - 24657 Richard Addo
-   1 | 6742 - 83735 Tasha ride inc
-1 | 1085 - 72312 N and W Cab Co
-   1 | 3591 - 63480 Chuks Cab
-   1 | 0118 - 42111 Godfrey S.Awir
-   1 | 6574 - Babylon Express Inc.
-   1 | 3094 - 24059 G.L.B. Cab Co
-   1 | 5874 - 73628 Sergey Cab Corp.
-   1 | 6743 - 78771 Luhak Corp
-   1 | 5074 - 54002 Ahzmi Inc
-   1 | 3623 - 72222 Arrington Enterprises
-   1 | 4053 - 40193 Adwar H. Nikola
-   1 | Chicago Star Taxicab
-   1 | 3011 - 66308 JBL Cab Inc.
-(51 rows)
+
+| cnt |                 company_name |
+|:-:|:-:|
+  97 | Nova Taxi Affiliation Llc |
+  89 | Patriot Taxi Dba Peace Taxi Associat |
+  85 | Blue Diamond |
+  81 | Checker Taxi Affiliation |
+  80 | Chicago Medallion Management |
+  69 | Chicago Independents |
+  67 | 24 Seven Taxi |
+  60 | Checker Taxi |
+  55 | American United |
+  53 | Chicago Medallion Leasing INC |
+  49 | Top Cab Affiliation |
+  48 | KOAM Taxi Association |
+  38 | Chicago Taxicab |
+  34 | Norshore Cab |
+  20 | Gold Coast Taxi |
+  20 | Metro Group |
+  18 | Service Taxi Association |
+  14 | 5 Star Taxi |
+   8 | American United Taxi Affiliation |
+   8 | Metro Jet Taxi A |
+   7 | Setare Inc |
+   1 | 5997 - 65283 AW Services Inc. |
+   1 | 2092 - 61288 Sbeih company |
+   1 | 1469 - 64126 Omar Jada |
+   1 | 2733 - 74600 Benny Jona |
+   1 | 2192 - 73487 Zeymane Corp |
+   1 | 5006 - 39261 Salifu Bawa | 
+   1 | 3556 - 36214 RC Andrews Cab |
+   1 | 3721 - Santamaria Express, Alvaro Santamaria |
+   1 | 2809 - 95474 C & D Cab Co Inc. |
+   1 | 2241 - 44667 - Felman Corp, Manuel Alonso |
+   1 | 3620 - 52292 David K. Cab Corp. |
+   1 | 2823 - 73307 Lee Express Inc |
+   1 | 6057 - 24657 Richard Addo |
+   1 | 6742 - 83735 Tasha ride inc |
+   1 | 1085 - 72312 N and W Cab Co |
+   1 | 3591 - 63480 Chuks Cab |
+   1 | 0118 - 42111 Godfrey S.Awir |
+   1 | 6574 - Babylon Express Inc. |
+   1 | 3094 - 24059 G.L.B. Cab Co |
+   1 | 5874 - 73628 Sergey Cab Corp. |
+   1 | 6743 - 78771 Luhak Corp |
+   1 | 5074 - 54002 Ahzmi Inc |
+   1 | 3623 - 72222 Arrington Enterprises |
+   1 | 4053 - 40193 Adwar H. Nikola |
+   1 | Chicago Star Taxicab |
+   1 | 3011 - 66308 JBL Cab Inc. |
+(51 rows) 
+
 Запрос, которым тебе удалось решить задачу.
+
 \c chicago_taxi
+
 SELECT COUNT(cab_id) AS cnt, company_name FROM cabs GROUP BY company_name HAVING COUNT(cab_id) < 100 ORDER BY cnt DESC
-Задание 3
+
+* Задание 3
+
+В приложении такси рассчитывается коэффициент стоимости поездки. Если погода хорошая, значение коэффициента равно 1. Если на улице дождь или шторм, коэффициент повышается до 2. У команды есть гипотеза, что в расчётах коэффициента ошибка. Чтобы проверить расчёт коэффициента, команде нужна выборка данных: разработчик может сверить коэффициент с данными в логах и исправить баг. Твоя задача — получить выборку.
+Чтобы это сделать:
+Получи описание погодных условий из таблицы weather_records для каждого часа.
+Раздели все часы на две группы оператором CASE: Bad, если поле description содержит слова rain или storm; Good для всех остальных.
+Полученное поле назови weather_conditions.
+В результирующей таблице должно быть два поля — дата и час (ts) и weather_conditions.
+Сделай выборку за период с 2017-11-05 00:00 по 2017-11-06 00:00.
+  
 Таблица с данными за указанный период. 
-        ts          | weather_conditions
----------------------+--------------------
- 2017-11-05 00:00:00 | Good
- 2017-11-05 01:00:00 | Bad
- 2017-11-05 02:00:00 | Good
- 2017-11-05 03:00:00 | Good
- 2017-11-05 04:00:00 | Bad
- 2017-11-05 05:00:00 | Bad
- 2017-11-05 06:00:00 | Good
- 2017-11-05 07:00:00 | Good
- 2017-11-05 08:00:00 | Good
- 2017-11-05 09:00:00 | Good
- 2017-11-05 10:00:00 | Good
- 2017-11-05 11:00:00 | Good
- 2017-11-05 12:00:00 | Good
- 2017-11-05 13:00:00 | Good
- 2017-11-05 14:00:00 | Bad
- 2017-11-05 15:00:00 | Good
- 2017-11-05 16:00:00 | Bad
- 2017-11-05 17:00:00 | Good
- 2017-11-05 18:00:00 | Bad
- 2017-11-05 19:00:00 | Bad
- 2017-11-05 20:00:00 | Bad
- 2017-11-05 21:00:00 | Good
- 2017-11-05 22:00:00 | Good
- 2017-11-05 23:00:00 | Good
- 2017-11-06 00:00:00 | Good
+
+|        ts          | weather_conditions|
+|:-:|:-:|
+| 2017-11-05 00:00:00 | Good |
+| 2017-11-05 01:00:00 | Bad |
+| 2017-11-05 02:00:00 | Good |
+| 2017-11-05 03:00:00 | Good |
+| 2017-11-05 04:00:00 | Bad |
+| 2017-11-05 05:00:00 | Bad |
+| 2017-11-05 06:00:00 | Good |
+| 2017-11-05 07:00:00 | Good |
+| 2017-11-05 08:00:00 | Good |
+| 2017-11-05 09:00:00 | Good |
+| 2017-11-05 10:00:00 | Good |
+| 2017-11-05 11:00:00 | Good |
+| 2017-11-05 12:00:00 | Good |
+| 2017-11-05 13:00:00 | Good |
+| 2017-11-05 14:00:00 | Bad |
+| 2017-11-05 15:00:00 | Good |
+| 2017-11-05 16:00:00 | Bad |
+| 2017-11-05 17:00:00 | Good |
+| 2017-11-05 18:00:00 | Bad |
+| 2017-11-05 19:00:00 | Bad |
+| 2017-11-05 20:00:00 | Bad |
+| 2017-11-05 21:00:00 | Good |
+| 2017-11-05 22:00:00 | Good |
+| 2017-11-05 23:00:00 | Good |
+| 2017-11-06 00:00:00 | Good |
 (25 rows)
+
 Запрос, которым удалось решить задачу.
+
 \c chicago_taxi
+
 SELECT ts, CASE WHEN description LIKE '%rain%’ OR description LIKE '%storm%' THEN ‘Bad’ ELSE ‘Good’ END AS weather_conditions FROM weather_records WHERE ts BETWEEN '2017-11-05 00:00:00' AND '2017-11-06 00:00:00';
-Задание 4
+
+* Задание 4
+
+После обновления ПО таксопарки стали сообщать, что прибыль, которую они получают, не сходится с данными, которые отдаёт приложение. Разработка предполагает, что проблема может быть в данных о количестве поездок. 
+Чтобы определить, есть ли баг, нужно получить выборку с количеством поездок каждого таксопарка за 15 и 16 ноября 2017 года. 
+Выведи поле company_name. Поле с числом поездок назови trips_amount и выведи его.
+Результаты, полученные в поле trips_amount, отсортируй по убыванию.
+  
 Таблица с данными за указанный период.
- Choice Taxi Association                      |         5015
- Globe Taxi                                   |         4383
- Dispatch Taxi Affiliation                    |         3355
- Nova Taxi Affiliation Llc                    |         3175
- Patriot Taxi Dba Peace Taxi Associat         |         2235
- Checker Taxi Affiliation                     |         2216
- Blue Diamond                                 |         2070
- Chicago Medallion Management                 |         1955
- 24 Seven Taxi                                |         1775
- Chicago Medallion Leasing INC                |         1607
- Checker Taxi                                 |         1486
-American United                              |         1404
- Chicago Independents                         |         1296
- KOAM Taxi Association                        |         1259
- Chicago Taxicab                              |         1014
- Top Cab Affiliation                          |          978
- Gold Coast Taxi                              |          428
- Service Taxi Association                     |          402
- 5 Star Taxi                                  |          310
- 303 Taxi                                     |          250
- Setare Inc                                   |          230
- American United Taxi Affiliation             |          210
- Leonard Cab Co                               |          147
- 6574 - Babylon Express Inc.                  |           31
- Chicago Star Taxicab                         |           29
- 1085 - 72312 N and W Cab Co                  |           29
- 2809 - 95474 C & D Cab Co Inc.               |           29
- 2092 - 61288 Sbeih company                   |           27
- 3011 - 66308 JBL Cab Inc.                    |           25
- 3620 - 52292 David K. Cab Corp.              |           21
- 4615 - 83503 Tyrone Henderson                |           21
- 3623 - 72222 Arrington Enterprises           |           20
- 5074 - 54002 Ahzmi Inc                       |           16
- 2823 - 73307 Lee Express Inc                 |           15
- 4623 - 27290 Jay Kim                         |           15
- 3721 - Santamaria Express, Alvaro Santamaria |           14
- 5006 - 39261 Salifu Bawa                     |           14
-2192 - 73487 Zeymane Corp                    |           14
- 6057 - 24657 Richard Addo                    |           13
- 5997 - 65283 AW Services Inc.                |           12
- Metro Group                                  |           11
- 5062 - 34841 Sam Mestas                      |            8
- 4053 - 40193 Adwar H. Nikola                 |            7
- 2733 - 74600 Benny Jona                      |            7
- 5874 - 73628 Sergey Cab Corp.                |            5
- 2241 - 44667 - Felman Corp, Manuel Alonso    |            3
- 3556 - 36214 RC Andrews Cab                  |            2
+|                 company_name | trips_amount |
+|:-:|:-:|
+ Choice Taxi Association                      |         5015 |
+ Globe Taxi                                   |         4383 |
+ Dispatch Taxi Affiliation                    |         3355 |
+ Nova Taxi Affiliation Llc                    |         3175 |
+ Patriot Taxi Dba Peace Taxi Associat         |         2235 |
+ Checker Taxi Affiliation                     |         2216 |
+ Blue Diamond                                 |         2070 |
+ Chicago Medallion Management                 |         1955 |
+ 24 Seven Taxi                                |         1775 |
+ Chicago Medallion Leasing INC                |         1607 |
+ Checker Taxi                                 |         1486 |
+American United                              |         1404 |
+ Chicago Independents                         |         1296 |
+ KOAM Taxi Association                        |         1259 |
+ Chicago Taxicab                              |         1014 |
+ Top Cab Affiliation                          |          978 |
+ Gold Coast Taxi                              |          428 |
+ Service Taxi Association                     |          402 |
+ 5 Star Taxi                                  |          310 |
+ 303 Taxi                                     |          250 |
+ Setare Inc                                   |          230 |
+ American United Taxi Affiliation             |          210 |
+ Leonard Cab Co                               |          147 |
+ 6574 - Babylon Express Inc.                  |           31 |
+ Chicago Star Taxicab                         |           29 |
+ 1085 - 72312 N and W Cab Co                  |           29 |
+ 2809 - 95474 C & D Cab Co Inc.               |           29 |
+ 2092 - 61288 Sbeih company                   |           27 |
+ 3011 - 66308 JBL Cab Inc.                    |           25 |
+ 3620 - 52292 David K. Cab Corp.              |           21 |
+ 4615 - 83503 Tyrone Henderson                |           21 |
+ 3623 - 72222 Arrington Enterprises           |           20 |
+ 5074 - 54002 Ahzmi Inc                       |           16 |
+ 2823 - 73307 Lee Express Inc                 |           15 |
+ 4623 - 27290 Jay Kim                         |           15 |
+ 3721 - Santamaria Express, Alvaro Santamaria |           14 |
+ 5006 - 39261 Salifu Bawa                     |           14 |
+2192 - 73487 Zeymane Corp                    |           14 |
+ 6057 - 24657 Richard Addo                    |           13 |
+ 5997 - 65283 AW Services Inc.                |           12 |
+ Metro Group                                  |           11 |
+ 5062 - 34841 Sam Mestas                      |            8 |
+ 4053 - 40193 Adwar H. Nikola                 |            7 |
+ 2733 - 74600 Benny Jona                      |            7 |
+ 5874 - 73628 Sergey Cab Corp.                |            5 |
+ 2241 - 44667 - Felman Corp, Manuel Alonso    |            3 |
+ 3556 - 36214 RC Andrews Cab                  |            2 |
 (64 rows)
+
 Запрос, которым удалось решить задачу.
+
 \c chicago_taxi
+
 SELECT cabs.company_name as company_name, count(trips.cab_id) as trips_amount FROM trips INNER JOIN cabs ON cabs.cab_id = trips.cab_id WHERE cast(trips.start_ts as timestamp) >='2017-11-15 00:00:00' AND cast(trips.start_ts as timestamp) < '2017-11-17 00:00:00' GROUP BY company_name ORDER BY trips_amount DESC;
  
